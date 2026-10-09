@@ -1,0 +1,11 @@
+# Dependencies and builds: reproducible, not source.
+node_modules/
+wp-content/themes/*/assets/dist/
+wp-content/themes/*/assets/src/css/tokens.generated.css
+dist/
+
+# Packages: releases are built by bin/build-zips, and a commercial plugin's zip carries a licence.
+*.zip
+
+.DS_Store
+*.log

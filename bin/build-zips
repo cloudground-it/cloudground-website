@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# The two release packages, from the working tree: the theme (built, without its sources)
+# and the plugin (without its tests). Versions come from style.css and the plugin header,
+# which must agree — one release, one number.
+#
+#   bin/build-zips            → dist/cloudground-theme-<version>.zip, dist/cloudground-plugin-<version>.zip
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+THEME=wp-content/themes/cloudground
+PLUGIN=wp-content/plugins/cloudground
+theme_version=$(sed -n 's/^Version: *//p' "$THEME/style.css" | tr -d '\r')
+plugin_version=$(sed -n 's/^ \* Version: *//p' "$PLUGIN/cloudground.php" | tr -d '\r')
+constant_version=$(sed -n "s/^define('CLOUDGROUND_VERSION', '\(.*\)');/\1/p" "$PLUGIN/cloudground.php")
+if [ "$theme_version" != "$plugin_version" ] || [ "$plugin_version" != "$constant_version" ]; then
+    echo "Versions disagree: style.css $theme_version, plugin header $plugin_version, CLOUDGROUND_VERSION $constant_version." >&2
+    exit 1
+fi
+
+(cd "$THEME" && npm ci --silent && npm run build --silent)
+test -f "$THEME/assets/dist/.vite/manifest.json" || { echo "No manifest after the build." >&2; exit 1; }
+
+mkdir -p dist
+rm -f "dist/cloudground-theme-$theme_version.zip" "dist/cloudground-plugin-$plugin_version.zip"
+(cd wp-content/themes && zip -qr "../../dist/cloudground-theme-$theme_version.zip" cloudground \
+    -x "cloudground/node_modules/*" "cloudground/assets/src/*" "cloudground/package.json" "cloudground/package-lock.json" \
+       "cloudground/vite.config.mjs" "cloudground/tsconfig.json" "cloudground/.gitignore" "*.DS_Store")
+(cd wp-content/plugins && zip -qr "../../dist/cloudground-plugin-$plugin_version.zip" cloudground \
+    -x "cloudground/node_modules/*" "cloudground/tests/*" "cloudground/package.json" "cloudground/package-lock.json" "cloudground/.gitignore" "*.DS_Store")
+ls -la dist/*"$theme_version".zip
