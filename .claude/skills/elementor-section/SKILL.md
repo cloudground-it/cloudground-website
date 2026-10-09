@@ -28,8 +28,8 @@ What is the section made of?
 5. **Never use Elementor's style controls** (colour, typography, spacing). The look is the
    stylesheet's.
 
-**Building it from code** (a setup script, a demo): the same tree as JSON. See
-`tools/demo.php` for `$box()`, `$heading()`, `$text()` and `$widget()`. Save it to
+**Building it from code** (a setup script): the same tree as JSON. See
+`tools/site.php` for `$box()`, `$heading()`, `$text()` and `$widget()`. Save it to
 `_elementor_data` with `_elementor_edit_mode = builder`, then clear Elementor's cache.
 
 ## 3. The CSS the classes need

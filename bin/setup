@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # First run on this machine: WordPress, Elementor, Polylang (Italian and English), the
-# plugin and the theme, and a demo home page to look at and test against.
+# plugin and the theme, and the site's pages (tools/site.php) in both languages.
 #
 #   bin/setup                  admin / admin on http://localhost:8100
 #   ELEMENTOR_PRO_ZIP=/path/to/elementor-pro.zip bin/setup
@@ -34,7 +34,7 @@ fi
 bin/wp theme activate cloudground >/dev/null
 bin/wp plugin activate cloudground >/dev/null
 bin/wp eval-file /var/www/html/tools/setup-languages.php
-bin/wp eval-file /var/www/html/tools/demo.php
+bin/wp eval-file /var/www/html/tools/site.php
 
 echo
 echo "Ready: $URL/wp-admin (${WP_USER:-admin} / ${WP_PASS:-admin}) · mail: http://localhost:8125"

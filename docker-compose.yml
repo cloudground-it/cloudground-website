@@ -1,7 +1,7 @@
 # The site, as WordPress, on this machine.
 #
 #   docker compose up -d            → http://localhost:8100   (mail: http://localhost:8125)
-#   bin/setup                       → first run: WordPress, Elementor, Polylang, the demo
+#   bin/setup                       → first run: WordPress, Elementor, Polylang, the site's pages
 #   bin/wp <command>                → WP-CLI on the same filesystem
 #   docker compose down -v          → and forget the database
 #

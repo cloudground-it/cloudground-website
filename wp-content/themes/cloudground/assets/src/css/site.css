@@ -3,6 +3,9 @@
 @import "./controls.css";
 @import "./components/header.css";
 @import "./components/footer.css";
-@import "./components/contact.css";
+@import "./components/home.css";
+@import "./components/scope.css";
+@import "./components/measures.css";
+@import "./components/terminal.css";
 @import "./components/doc.css";
-@import "./components/demo.css";
+@import "./components/motion.css";

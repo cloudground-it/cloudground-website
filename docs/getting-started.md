@@ -47,13 +47,11 @@ ELEMENTOR_PRO_ZIP=~/Downloads/elementor-pro.zip bin/setup
 ```
 
 It installs WordPress (Italian), Elementor, Polylang with Italian on `/` and English on
-`/en/`, and activates the plugin and the theme. Then it builds a **demo home** in both
-languages:
-- a native section;
-- three columns that come in as you scroll;
-- the plugin's Contact card, whose words are fields.
+`/en/`, and activates the plugin and the theme. Then `tools/site.php` builds the site's
+pages in both languages: the home (native widgets, and the plugin's oscilloscope,
+measurements table and install terminal), the licence and the privacy notice.
 
-It also adds a privacy page and a menu per language. The addresses:
+It also writes the facts, the sharing card and a menu per language. The addresses:
 - the site: http://localhost:8100
 - the admin: `/wp-admin` (admin / admin)
 - Mailpit: http://localhost:8125

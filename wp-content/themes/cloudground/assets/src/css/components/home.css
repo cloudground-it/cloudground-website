@@ -1,0 +1,426 @@
+/* The home's bands (tools/site.php builds them from native widgets with these classes).
+ *
+ * The vocabulary, outer to inner:
+ *   band  band--alt | band--dark on-dark | band--top   a full-bleed stripe
+ *   frame                                            1440px between two hairlines
+ *   hero · hero-copy · hero-panel                    the first screen
+ *   section-head (--stack) · section-title · section-lede
+ *   cells (--dark) · cell (--inv | --dark) · cell-meta · cell-tag · cell-num · cell-title · cell-text
+ *   marquee · marquee-track · marquee-word (--serif --blue --warm)
+ *   install · install-copy · install-panel · steps
+ *   closing · actions · cta (--line --arrow --large)
+ * Widths and margins on a widget are said twice, to the browser and to Elementor
+ * (`--cloudground-max`, `--cloudground-margin`), and so are a container's direction and its
+ * share of a row (`--cloudground-direction`, `--cloudground-flex`): see
+ * docs/guidelines/04-elementor.md. */
+
+:root {
+    --pad: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* --- bands ----------------------------------------------------------------- */
+
+.band--alt {
+    border-top: 1px solid var(--rule);
+    background: var(--ground-alt);
+}
+
+.band--dark {
+    background: var(--dark);
+    color: var(--on-dark);
+}
+
+.band--top {
+    border-top: 1px solid var(--rule);
+}
+
+.on-dark .hud {
+    color: var(--on-dark-soft);
+}
+
+/* --- display sizes ----------------------------------------------------------- */
+
+.display--hero {
+    font-size: clamp(3.5rem, 8.6vw, 8.5rem);
+    line-height: 0.9;
+}
+
+.display--big {
+    max-width: 68.75rem;
+    --cloudground-max: 68.75rem;
+    font-size: clamp(2.75rem, 7vw, 7rem);
+    line-height: 0.92;
+}
+
+.display--install {
+    font-size: clamp(2.5rem, 5vw, 4.75rem);
+}
+
+.display--closing {
+    font-size: clamp(3.5rem, 10vw, 10.5rem);
+    line-height: 0.86;
+}
+
+/* --- hero ------------------------------------------------------------------ */
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hero-copy {
+    display: flex;
+    /* The design's shares are content widths (it has no border-box): its padding and
+       hairline are added to the basis, so the two columns split the row as it does. */
+    flex: 1 1 calc(37.5rem + 2 * var(--pad) + 1px);
+    --cloudground-flex: 1 1 calc(37.5rem + 2 * var(--pad) + 1px);
+    flex-direction: column;
+    --cloudground-direction: column;
+    gap: 2rem;
+    min-width: 0;
+    padding: clamp(2.5rem, 6vw, 5.5rem) var(--pad);
+    border-right: 1px solid var(--rule);
+}
+
+.hero-panel {
+    flex: 1 1 calc(30rem + 3.5rem);
+    min-width: 0;
+    padding: 1.75rem;
+    background: var(--ground-alt);
+}
+
+.lede {
+    max-width: 35rem;
+    --cloudground-max: 35rem;
+    font-size: clamp(1.125rem, 1.5vw, 1.3125rem);
+    line-height: 1.5;
+    color: var(--soft);
+}
+
+/* --- buttons: Elementor's Button widget, dressed --------------------------------- */
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.actions > .elementor-element {
+    width: auto;
+}
+
+.cta .elementor-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1.125rem 1.5rem;
+    border: 1px solid var(--text);
+    border-radius: 0;
+    background: var(--text);
+    color: var(--ground);
+    font: 600 1rem/1.2 var(--font-body);
+    letter-spacing: normal;
+    transition: background-color 0.14s linear, border-color 0.14s linear, color 0.14s linear;
+}
+
+.cta .elementor-button:hover,
+.cta .elementor-button:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-text);
+}
+
+.cta--line .elementor-button {
+    background: transparent;
+    color: var(--text);
+}
+
+.cta--line .elementor-button:hover,
+.cta--line .elementor-button:focus-visible {
+    border-color: var(--text);
+    background: var(--text);
+    color: var(--ground);
+}
+
+/* The arrow is the HUD's, and not part of the button's name. */
+.cta--arrow .elementor-button-text::after {
+    content: "→" / "";
+    margin-left: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+}
+
+.cta--large .elementor-button {
+    padding: 1.25rem 1.75rem;
+    font-size: 1.0625rem;
+}
+
+/* --- the marquee ------------------------------------------------------------ */
+
+.marquee {
+    overflow: hidden;
+    padding: 1.625rem 0;
+    border-block: 1px solid var(--rule);
+}
+
+.marquee-track {
+    display: flex;
+    align-items: baseline;
+    gap: 3rem;
+    width: max-content;
+    white-space: nowrap;
+}
+
+.marquee-track > .elementor-element {
+    flex: none;
+    width: auto;
+}
+
+.marquee-word {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 3.75vw, 3.375rem);
+    font-weight: 560;
+    font-stretch: 118%;
+    letter-spacing: -0.045em;
+}
+
+.marquee-word--serif {
+    font-family: var(--font-serif);
+    font-size: clamp(2.375rem, 4vw, 3.625rem);
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: 100%;
+    letter-spacing: -0.02em;
+}
+
+.marquee-word--blue {
+    color: var(--accent);
+}
+
+.marquee-word--warm {
+    color: var(--warm);
+}
+
+/* --- section heads ------------------------------------------------------------ */
+
+.section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 4rem;
+    padding: clamp(3.5rem, 8vw, 7.5rem) var(--pad) 3.5rem;
+}
+
+.section-head--stack {
+    flex-direction: column;
+    --cloudground-direction: column;
+    align-items: stretch;
+    gap: 1.375rem;
+    padding-bottom: 4rem;
+}
+
+.section-head--tight {
+    padding-bottom: 3rem;
+}
+
+.section-title {
+    /* As wide as its words, up to 900px: Elementor's 100% would push the sentence beside
+       it onto a line of its own. */
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    --cloudground-direction: column;
+    gap: 1.375rem;
+    max-width: 56.25rem;
+}
+
+.section-lede {
+    max-width: 22.5rem;
+    --cloudground-max: 22.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--soft);
+}
+
+.section-lede--wide {
+    max-width: 23.75rem;
+    --cloudground-max: 23.75rem;
+}
+
+/* --- cells ---------------------------------------------------------------------- */
+
+.cells {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
+    gap: 1px;
+    border-block: 1px solid var(--rule);
+    background: var(--rule);
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    --cloudground-direction: column;
+    gap: 0.875rem;
+    min-height: 15rem;
+    padding: 2rem 1.75rem 2.25rem;
+    background: var(--ground);
+    color: var(--text);
+}
+
+.cell-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.cell-meta > .elementor-element {
+    width: auto;
+}
+
+.cell-num {
+    color: var(--faint);
+}
+
+.cell-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 560;
+    font-stretch: 110%;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+}
+
+.cell-text {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--meta);
+}
+
+/* A cell inverts on hover, in the time of a state change: no motion to reduce. */
+.cell--inv,
+.cell--inv .hud,
+.cell--inv .cell-text {
+    transition: background-color 0.14s linear, color 0.14s linear;
+}
+
+.cell--inv:hover {
+    background: var(--text);
+    color: var(--ground);
+}
+
+.cell--inv:hover .hud,
+.cell--inv:hover .cell-text {
+    color: var(--on-dark-soft);
+}
+
+.cell--inv:hover .cell-num {
+    color: var(--warm);
+}
+
+.cells--dark {
+    border-bottom: 0;
+    border-top-color: var(--dark-rule);
+    background: var(--dark-rule);
+}
+
+.cell--dark {
+    min-height: 0;
+    padding: 2.25rem 2rem 3rem;
+    background: var(--dark);
+    color: var(--on-dark);
+}
+
+.on-dark .cell-letter {
+    color: var(--warm);
+}
+
+.cell--dark .cell-title {
+    font-size: 2.125rem;
+}
+
+.cell--dark .cell-text {
+    font-size: 1.0625rem;
+    color: var(--on-dark-soft);
+}
+
+/* --- installation --------------------------------------------------------------- */
+
+.install {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.install-copy {
+    display: flex;
+    flex: 1 1 calc(26.25rem + 2 * var(--pad) + 1px);
+    --cloudground-flex: 1 1 calc(26.25rem + 2 * var(--pad) + 1px);
+    flex-direction: column;
+    --cloudground-direction: column;
+    gap: 1.5rem;
+    padding: clamp(3.5rem, 8vw, 7rem) var(--pad);
+    border-right: 1px solid var(--rule);
+}
+
+.install-panel {
+    display: flex;
+    flex: 1 1 calc(35rem + 2 * clamp(1.75rem, 4vw, 3.5rem));
+    align-items: center;
+    min-width: 0;
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.steps ol {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+    list-style: none;
+    counter-reset: step;
+}
+
+.steps li {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.125rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.125rem;
+    line-height: 1.45;
+    counter-increment: step;
+}
+
+.steps li::before {
+    content: counter(step, decimal-leading-zero);
+    flex: none;
+    padding-top: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--warm-text);
+}
+
+/* --- the closing call ----------------------------------------------------------- */
+
+.closing {
+    display: flex;
+    flex-direction: column;
+    --cloudground-direction: column;
+    gap: 2.25rem;
+    padding: clamp(4.5rem, 10vw, 10rem) var(--pad);
+}
+
+@media (max-width: 47.5rem) {
+    .hero-copy,
+    .install-copy {
+        border-right: 0;
+    }
+
+    .hero-panel {
+        padding: 1.75rem var(--pad);
+    }
+
+    .install-panel {
+        padding: 0 0 var(--pad);
+    }
+}

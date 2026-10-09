@@ -1,0 +1,66 @@
+/* Every animation of the design, and only under `html.motion`: the boot script sets it when
+ * there is JavaScript and the reader has not asked for reduced motion, and never in
+ * Elementor's preview. With reduced motion nothing here exists — no loop, no fade, nothing
+ * held back — and every state is the still one. */
+
+@keyframes cg-wave {
+    from { transform: translateX(0); }
+    to { transform: translateX(-600px); }
+}
+
+@keyframes cg-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes cg-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+@keyframes cg-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+}
+
+@keyframes cg-bar {
+    0%, 100% { transform: scaleX(1); }
+    50% { transform: scaleX(0.86); }
+}
+
+@keyframes cg-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes cg-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* The traces scroll left one period at a time: steady with the cache, hurried without. */
+html.motion .scope-wave--on { animation: cg-wave 6s linear infinite; }
+html.motion .scope-wave--off { animation: cg-wave 2.4s linear infinite; }
+
+/* The readings breathe, each a third of a cycle after the last. */
+html.motion .scope-bar {
+    transform-origin: left center;
+    animation: cg-bar 2.8s ease-in-out infinite;
+}
+html.motion .scope-reading--php .scope-bar { animation-delay: 0.7s; }
+html.motion .scope-reading--db .scope-bar { animation-delay: 1.4s; }
+html.motion .scope-bar { transition: width 0.3s ease-out; }
+
+/* The marquee loops only once lib/marquee.ts has doubled its words: -50% is one copy. */
+html.motion .marquee-track[data-looped] { animation: cg-marquee 46s linear infinite; }
+
+html.motion .led { animation: cg-pulse 1.6s ease-in-out infinite; }
+html.motion .caret { animation: cg-blink 1s steps(1) infinite; }
+html.motion .mark--float .mark-cloud { animation: cg-float 5s ease-in-out infinite; }
+
+/* The installer's lines arrive one by one, once the terminal is on screen. */
+html.motion .terminal:not(.is-playing) .terminal-line { opacity: 0; }
+html.motion .terminal.is-playing .terminal-line {
+    animation: cg-in 0.4s ease-out both;
+    animation-delay: calc(0.4s + var(--line, 0) * 0.8s);
+}
