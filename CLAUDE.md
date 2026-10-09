@@ -10,13 +10,14 @@ A WordPress site built from [Bottega](https://github.com/frascella-dev/bottega):
 <!-- Fill this in when the project starts (the bottega-new-project skill does). Only facts
      the owner gave: an empty line is better than a guess. -->
 
-- **Business:**
+- **Business:** CloudGround, an open source hosting control panel
 - **Languages:** it (default), en
-- **Production:** host · SSH user · key · site path (never passwords)
-- **Plugins it runs with:** Elementor, Elementor Pro, Polylang, …
+- **Production:** not decided
+- **Plugins it runs with:** Elementor, Polylang
 - **Who receives the site's email:**
-- **Laws that apply:** (e.g. GDPR + Italian Codice Privacy, Garante cookie guidelines 2021)
-- **Register of the words:** (e.g. informal "tu", warm, no jargon)
+- **Laws that apply:**
+- **Register of the words:**
+- **Design:** `design/reference/home.dc.html` (the approved home, Italian copy)
 
 ## How to work here
 
