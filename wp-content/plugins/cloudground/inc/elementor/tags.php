@@ -93,7 +93,7 @@ class Cloudground_Tag_Link extends \Elementor\Core\DynamicTags\Data_Tag
         $this->add_control('target', [
             'label' => __('Where it leads', 'cloudground'),
             'type' => \Elementor\Controls_Manager::SELECT,
-            'options' => ['phone' => __('Call', 'cloudground'), 'email' => __('Write', 'cloudground'), 'map' => __('The map', 'cloudground')],
+            'options' => ['phone' => __('Call', 'cloudground'), 'email' => __('Write', 'cloudground'), 'map' => __('The map', 'cloudground'), 'docs' => __('The documentation', 'cloudground'), 'repository' => __('The source code', 'cloudground')],
             'default' => 'phone',
         ]);
     }
@@ -106,6 +106,7 @@ class Cloudground_Tag_Link extends \Elementor\Core\DynamicTags\Data_Tag
             'phone' => $facts['phone'] !== '' ? 'tel:' . preg_replace('/[^0-9+]/', '', $facts['phone']) : '',
             'email' => $facts['email'] !== '' ? 'mailto:' . $facts['email'] : '',
             'map' => cloudground_tag_fact('address') !== '' ? 'https://www.openstreetmap.org/search?query=' . rawurlencode(cloudground_tag_fact('address')) : '',
+            'docs', 'repository' => (string) $facts[(string) $this->get_settings('target')],
             default => '',
         };
     }

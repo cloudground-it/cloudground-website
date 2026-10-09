@@ -89,3 +89,44 @@ function cloudground_reveal(float $delay = 0.0): string
 {
     return $delay > 0 ? sprintf('data-reveal style="--reveal-delay:%ss"', rtrim(rtrim(number_format($delay, 2, '.', ''), '0'), '.')) : 'data-reveal';
 }
+
+/** The licence page, in this reader's language (the plugin says which page it is). */
+function cloudground_license_url(): string
+{
+    $id = function_exists('cloudground_license_page_id') ? cloudground_license_page_id() : 0;
+
+    return $id > 0 ? (string) get_permalink($id) : '';
+}
+
+/**
+ * A section of the home page, from anywhere: `/#funzioni` on an Italian page, `/en/#funzioni`
+ * on an English one. On the home itself the browser only scrolls, because the address is
+ * the same document.
+ */
+function cloudground_anchor_url(string $anchor): string
+{
+    return cloudground_home_url() . '#' . rawurlencode($anchor);
+}
+
+/**
+ * The tile mark: the ink tile, the paper cloud, the blue and orange bars, on a 48 grid
+ * (the product's docs/media/logo.svg). Colours are classes, so the stylesheet decides them
+ * from the tokens and `--inverse` swaps tile and cloud for a dark surface. Decorative: the
+ * link around it carries the name.
+ */
+function cloudground_mark(int $size = 30, string $variant = ''): string
+{
+    $class = 'mark' . ($variant !== '' ? ' mark--' . sanitize_html_class($variant) : '');
+
+    return sprintf(
+        '<svg class="%1$s" viewBox="0 0 48 48" width="%2$d" height="%2$d" aria-hidden="true" focusable="false">'
+        . '<rect class="mark-tile" width="48" height="48" rx="11"/>'
+        . '<g transform="translate(4 3) scale(.84)">'
+        . '<path class="mark-cloud" d="M14 26A8 8 0 1 1 15.843 10.215A10 10 0 0 1 33.87 14.391A6 6 0 1 1 36 26Z"/>'
+        . '<rect class="mark-bar mark-bar--blue" x="14" y="30" width="28" height="4.6" rx="1"/>'
+        . '<rect class="mark-bar mark-bar--orange" x="6" y="38" width="28" height="4.6" rx="1"/>'
+        . '</g></svg>',
+        esc_attr($class),
+        $size,
+    );
+}

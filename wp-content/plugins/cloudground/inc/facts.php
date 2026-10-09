@@ -34,6 +34,10 @@ function cloudground_fact_fields(): array
         'phone' => __('Telephone', 'cloudground'),
         'email' => __('Email', 'cloudground'),
         'vat' => __('VAT number', 'cloudground'),
+        // The product's two other homes: the nav, the footer and the buttons that lead there
+        // read them from here, so a move is one change.
+        'docs' => __('Documentation (address)', 'cloudground'),
+        'repository' => __('Source code (address)', 'cloudground'),
     ];
 }
 
@@ -62,6 +66,8 @@ add_action('admin_init', static function (): void {
                 $value = sanitize_text_field((string) ($input[$key] ?? ''));
                 $out[$key] = match ($key) {
                     'email' => is_email($value) ? $value : '',
+                    // An address that is not http(s) is saved as empty, never "fixed".
+                    'docs', 'repository' => preg_match('#^https?://#i', $value) ? esc_url_raw($value, ['http', 'https']) : '',
                     'country' => strtoupper(substr($value, 0, 2)),
                     default => $value,
                 };
@@ -75,7 +81,7 @@ add_action('admin_init', static function (): void {
         add_settings_field($key, $label, static function () use ($key): void {
             printf(
                 '<input type="%1$s" class="regular-text" id="cloudground-fact-%2$s" name="%3$s[%2$s]" value="%4$s" />',
-                $key === 'email' ? 'email' : 'text',
+                match ($key) { 'email' => 'email', 'docs', 'repository' => 'url', default => 'text' },
                 esc_attr($key),
                 esc_attr(CLOUDGROUND_OPTION_FACTS),
                 esc_attr(cloudground_facts()[$key] ?? ''),
@@ -89,7 +95,7 @@ add_action('admin_menu', static function (): void {
         ?>
         <div class="wrap">
             <h1><?php esc_html_e('CloudGround — the facts', 'cloudground'); ?></h1>
-            <p><?php esc_html_e('What the site says about the business, in one place: the footer, the contact card, the dynamic tags and the structured data read it from here. Leave a field empty rather than guess.', 'cloudground'); ?></p>
+            <p><?php esc_html_e('What the site says about the business, in one place: the header, the footer, the dynamic tags and the structured data read it from here. Leave a field empty rather than guess.', 'cloudground'); ?></p>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('cloudground_facts');

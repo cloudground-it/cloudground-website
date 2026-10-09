@@ -32,6 +32,7 @@ define('CLOUDGROUND_DIR', plugin_dir_path(__FILE__));
 define('CLOUDGROUND_URL', plugin_dir_url(__FILE__));
 
 require CLOUDGROUND_DIR . 'inc/facts.php';      // the business's facts, in one option
+require CLOUDGROUND_DIR . 'inc/pages.php';      // which page is the licence, in each language
 require CLOUDGROUND_DIR . 'inc/media.php';      // a photograph's alt text in every language
 require CLOUDGROUND_DIR . 'inc/polylang.php';   // the languages: what is translatable, and its addresses
 require CLOUDGROUND_DIR . 'inc/elementor.php';  // the widgets, the dynamic tags, the Kit
