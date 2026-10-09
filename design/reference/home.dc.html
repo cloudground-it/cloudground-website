@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>CloudGround — hosting che si misura</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=Instrument+Serif:ital@0;1&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F2F1EC}
+a{color:#0F0F12;text-decoration:none}a:hover{color:#2F5BFF}
+.hud{font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500}
+.disp{font-family:Archivo,system-ui,sans-serif;font-stretch:118%;font-weight:560;letter-spacing:-.045em}
+.ser{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em;font-stretch:100%}
+.inv{transition:background-color .14s linear,color .14s linear;background:#F2F1EC;color:#0F0F12}
+.inv:hover{background:#0F0F12;color:#F2F1EC}
+.inv .m{color:#55555D;transition:color .14s linear}.inv:hover .m{color:#B7B6AE}
+.inv .n{color:#6E6E76}.inv:hover .n{color:#E0612B}
+.btn-ink{background:#0F0F12;color:#F2F1EC;transition:background-color .14s linear}.btn-ink:hover{background:#2F5BFF;color:#FFFFFF}
+.btn-line{border:1px solid #0F0F12;color:#0F0F12;transition:background-color .14s linear,color .14s linear}.btn-line:hover{background:#0F0F12;color:#F2F1EC}
+.navl{color:#55555D;transition:background-color .12s linear,color .12s linear}.navl:hover{background:#0F0F12;color:#F2F1EC}
+@keyframes cgWave{from{transform:translateX(0)}to{transform:translateX(-600px)}}
+@keyframes cgMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes cgBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes cgPulse{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes cgBar{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.86)}}
+@keyframes cgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes cgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.wave{animation:cgWave 6s linear infinite}
+.wave-fast{animation:cgWave 2.4s linear infinite}
+.marq{animation:cgMarq 46s linear infinite}
+.caret{animation:cgBlink 1s steps(1) infinite}
+.led{animation:cgPulse 1.6s ease-in-out infinite}
+.bar{transform-origin:left center;animation:cgBar 2.8s ease-in-out infinite}
+.bar2{transform-origin:left center;animation:cgBar 2.8s ease-in-out .7s infinite}
+.bar3{transform-origin:left center;animation:cgBar 2.8s ease-in-out 1.4s infinite}
+.t1{animation:cgIn .4s ease-out .4s both}.t2{animation:cgIn .4s ease-out 1.2s both}.t3{animation:cgIn .4s ease-out 2s both}.t4{animation:cgIn .4s ease-out 2.8s both}.t5{animation:cgIn .4s ease-out 3.6s both}
+.logo-c{animation:cgFloat 5s ease-in-out infinite}
+.motion-off *{animation:none !important}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</style>
+</helmet>
+<div class="{{motionClass}}" style="background: #F2F1EC; color: #0F0F12; font-family: Archivo, system-ui, sans-serif; min-height: 100vh; overflow-x: hidden">
+
+<div style="border-bottom: 1px solid #D6D4CC; background: #E9E7E0">
+<div class="hud" style="max-width: 1440px; margin: 0 auto; padding: 8px 20px; display: flex; flex-wrap: wrap; gap: 6px 28px; color: #55555D">
+<span style="display: inline-flex; gap: 8px; align-items: center"><span class="led" style="width: 7px; height: 7px; border-radius: 4px; background: #2F5BFF"></span>Release [VERSIONE] disponibile</span>
+<span>Ubuntu 24.04 · 26.04</span>
+<span>Licenza FSL</span>
+<span style="margin-left: auto">Nessun abbonamento</span>
+</div>
+</div>
+
+<nav aria-label="Principale" style="position: sticky; top: 0; z-index: 20; background: rgba(242,241,236,.94); backdrop-filter: blur(8px); border-bottom: 1px solid #D6D4CC">
+<div style="max-width: 1440px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: stretch; min-height: 52px">
+<a href="#top" style="display: flex; gap: 10px; align-items: center; padding: 0 20px; border-right: 1px solid #D6D4CC">
+<svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#0F0F12"></rect><g transform="translate(4 3) scale(.84)"><path class="logo-c" fill="#F2F1EC" d="M14 26A8 8 0 1 1 15.843 10.215A10 10 0 0 1 33.87 14.391A6 6 0 1 1 36 26Z"></path><rect x="14" y="30" width="28" height="4.6" rx="1" fill="#2F5BFF"></rect><rect x="6" y="38" width="28" height="4.6" rx="1" fill="#E0612B"></rect></g></svg>
+<span class="disp" style="font-size: 19px; letter-spacing: -.04em">cloudground</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+<a href="#funzioni" class="navl hud" style="display: flex; align-items: center; padding: 0 16px">Funzioni</a>
+<a href="#proprieta" class="navl hud" style="display: flex; align-items: center; padding: 0 16px">Perché</a>
+<a href="#misure" class="navl hud" style="display: flex; align-items: center; padding: 0 16px">Misure</a>
+<a href="#installa" class="navl hud" style="display: flex; align-items: center; padding: 0 16px">Installazione</a>
+<a href="#top" class="navl hud" style="display: flex; align-items: center; padding: 0 16px">Docs</a>
+</div>
+<div style="margin-left: auto; display: flex; align-items: stretch">
+<a href="https://github.com/cloudground-it/cloudground" class="navl hud" style="display: flex; align-items: center; padding: 0 18px; border-left: 1px solid #D6D4CC">GitHub ↗</a>
+<a href="#installa" class="btn-ink hud" style="display: flex; align-items: center; padding: 0 22px">Installa</a>
+</div>
+</div>
+</nav>
+
+<header id="top" style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #D6D4CC; border-right: 1px solid #D6D4CC; display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 600px; min-width: 0; padding: clamp(40px, 6vw, 88px) clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 32px; border-right: 1px solid #D6D4CC">
+<span class="hud" style="color: #55555D">001 / Pannello di hosting open source</span>
+<h1 class="disp" style="margin: 0; font-size: clamp(56px, 8.6vw, 136px); line-height: .9">Hosting<br>che si <span class="ser" style="color: #2F5BFF">misura.</span></h1>
+<p style="margin: 0; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: #3B3B42; max-width: 560px">Un comando installa il pannello sul tuo server. Ogni sito nasce con la sua cache, il suo PHP, il suo certificato e backup che vengono ripristinati per prova dopo ogni copia.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#installa" class="btn-ink" style="display: inline-flex; gap: 14px; align-items: center; padding: 18px 24px; font-size: 16px; font-weight: 600">Installa in un comando <span class="hud" style="color: inherit">→</span></a>
+<a href="#top" class="btn-line" style="display: inline-flex; align-items: center; padding: 18px 24px; font-size: 16px; font-weight: 600">Leggi le docs</a>
+</div>
+<span class="hud" style="color: #6E6E76">Gratis · Codice aperto · Sui tuoi server</span>
+</div>
+
+<div style="flex: 1 1 480px; min-width: 0; padding: 28px; display: flex; flex-direction: column; gap: 16px; background: #E9E7E0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<span class="hud" style="color: #55555D">Simulazione · un sito WordPress sotto traffico</span>
+<button type="button" onClick="{{toggleCache}}" aria-pressed="{{cachePressed}}" class="hud" style="background: #0F0F12; color: #F2F1EC; border: 0; padding: 10px 14px; cursor: pointer; min-height: 40px">Cache: {{cacheLabel}}</button>
+</div>
+<div role="img" aria-label="{{scopeLabel}}" style="position: relative; height: 230px; background: #0F0F12; overflow: hidden">
+<span style="position: absolute; left: 10px; top: 10px; width: 14px; height: 14px; border-left: 1px solid #F2F1EC; border-top: 1px solid #F2F1EC"></span>
+<span style="position: absolute; right: 10px; top: 10px; width: 14px; height: 14px; border-right: 1px solid #F2F1EC; border-top: 1px solid #F2F1EC"></span>
+<span style="position: absolute; left: 10px; bottom: 10px; width: 14px; height: 14px; border-left: 1px solid #F2F1EC; border-bottom: 1px solid #F2F1EC"></span>
+<span style="position: absolute; right: 10px; bottom: 10px; width: 14px; height: 14px; border-right: 1px solid #F2F1EC; border-bottom: 1px solid #F2F1EC"></span>
+<svg viewBox="0 0 600 230" preserveAspectRatio="none" width="100%" height="100%" style="position: absolute; inset: 0" aria-hidden="true">
+<g stroke="#2A2A30" stroke-width="1"><path d="M0 46H600M0 92H600M0 138H600M0 184H600"></path><path d="M100 0V230M200 0V230M300 0V230M400 0V230M500 0V230"></path></g>
+<sc-if value="{{cacheOn}}" hint-placeholder-val="{{ true }}">
+<g class="wave"><path fill="none" stroke="#2F5BFF" stroke-width="2.5" d="M0 170 L40 168 L60 150 L80 172 L120 166 L140 158 L160 170 L200 167 L230 152 L250 171 L300 166 L340 169 L360 155 L380 171 L420 167 L440 160 L460 170 L500 166 L530 151 L550 172 L600 170 L640 168 L660 150 L680 172 L720 166 L740 158 L760 170 L800 167 L830 152 L850 171 L900 166 L940 169 L960 155 L980 171 L1020 167 L1040 160 L1060 170 L1100 166 L1130 151 L1150 172 L1200 170"></path></g>
+</sc-if>
+<sc-if value="{{cacheOff}}" hint-placeholder-val="{{ false }}">
+<g class="wave-fast"><path fill="none" stroke="#E0612B" stroke-width="2.5" d="M0 120 L30 60 L50 140 L70 40 L100 110 L120 30 L150 130 L170 50 L200 100 L220 20 L250 140 L280 60 L300 120 L330 40 L350 130 L380 70 L400 110 L420 25 L450 135 L480 55 L500 115 L520 35 L550 128 L580 48 L600 120 L630 60 L650 140 L670 40 L700 110 L720 30 L750 130 L770 50 L800 100 L820 20 L850 140 L880 60 L900 120 L930 40 L950 130 L980 70 L1000 110 L1020 25 L1050 135 L1080 55 L1100 115 L1120 35 L1150 128 L1180 48 L1200 120"></path></g>
+</sc-if>
+</svg>
+<span class="hud" style="position: absolute; left: 32px; top: 28px; color: #B7B6AE">Tempo di risposta</span>
+<span class="hud" style="position: absolute; right: 32px; top: 28px; color: {{scopeColor}}">{{scopeState}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #D6D4CC; border: 1px solid #D6D4CC">
+<div style="background: #F2F1EC; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span class="hud" style="color: #55555D">Cache</span>
+<span class="disp" style="font-size: 24px">{{cacheRead}}</span>
+<span class="bar" style="display: block; height: 4px; background: #2F5BFF; width: {{cacheBar}}"></span>
+</div>
+<div style="background: #F2F1EC; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span class="hud" style="color: #55555D">PHP del sito</span>
+<span class="disp" style="font-size: 24px">{{phpRead}}</span>
+<span class="bar2" style="display: block; height: 4px; background: #E0612B; width: {{phpBar}}"></span>
+</div>
+<div style="background: #F2F1EC; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span class="hud" style="color: #55555D">Database</span>
+<span class="disp" style="font-size: 24px">{{dbRead}}</span>
+<span class="bar3" style="display: block; height: 4px; background: #0F0F12; width: {{dbBar}}"></span>
+</div>
+</div>
+<span class="hud" style="color: #6E6E76">Illustrazione, non una misura. I numeri veri sono nella sezione 03.</span>
+</div>
+</header>
+
+<section aria-label="Tecnologie" style="border-top: 1px solid #D6D4CC; border-bottom: 1px solid #D6D4CC; overflow: hidden; padding: 26px 0; background: #F2F1EC">
+<div class="marq" style="display: flex; gap: 48px; width: max-content; align-items: baseline; white-space: nowrap">
+<span class="disp" style="font-size: 54px">nginx</span><span class="ser" style="font-size: 58px; color: #2F5BFF">PHP 8.5</span><span class="disp" style="font-size: 54px">MariaDB</span><span class="ser" style="font-size: 58px; color: #E0612B">Redis</span><span class="disp" style="font-size: 54px">restic</span><span class="ser" style="font-size: 58px; color: #2F5BFF">Let's Encrypt</span><span class="disp" style="font-size: 54px">HTTP/3</span><span class="ser" style="font-size: 58px; color: #E0612B">WordPress</span><span class="disp" style="font-size: 54px">Laravel</span><span class="ser" style="font-size: 58px; color: #2F5BFF">systemd</span>
+<span class="disp" style="font-size: 54px">nginx</span><span class="ser" style="font-size: 58px; color: #2F5BFF">PHP 8.5</span><span class="disp" style="font-size: 54px">MariaDB</span><span class="ser" style="font-size: 58px; color: #E0612B">Redis</span><span class="disp" style="font-size: 54px">restic</span><span class="ser" style="font-size: 58px; color: #2F5BFF">Let's Encrypt</span><span class="disp" style="font-size: 54px">HTTP/3</span><span class="ser" style="font-size: 58px; color: #E0612B">WordPress</span><span class="disp" style="font-size: 54px">Laravel</span><span class="ser" style="font-size: 58px; color: #2F5BFF">systemd</span>
+</div>
+</section>
+
+<section id="funzioni" style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #D6D4CC; border-right: 1px solid #D6D4CC">
+<div style="padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 56px) 56px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 22px; max-width: 900px">
+<span class="hud" style="color: #55555D">01 / Funzioni</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(40px, 5.6vw, 84px); line-height: .95">Il controllo che un <span class="ser" style="color: #2F5BFF">tutorial</span> non ti dà.</h2>
+</div>
+<p style="margin: 0; max-width: 360px; font-size: 17px; line-height: 1.55; color: #3B3B42">Otto cose che di solito si configurano a mano, una sera alla volta. Qui sono accese dal primo sito.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: #D6D4CC; border-top: 1px solid #D6D4CC; border-bottom: 1px solid #D6D4CC">
+<sc-for list="{{features}}" as="f" hint-placeholder-count="8">
+<article class="inv" style="padding: 32px 28px 36px; display: flex; flex-direction: column; gap: 14px; min-height: 240px">
+<div style="display: flex; justify-content: space-between; gap: 12px">
+<span class="hud m">{{f.tag}}</span>
+<span class="hud n">{{f.num}}</span>
+</div>
+<h3 class="disp" style="margin: 0; font-size: 28px; line-height: 1.02; font-stretch: 110%">{{f.title}}</h3>
+<p class="m" style="margin: 0; font-size: 16px; line-height: 1.55">{{f.text}}</p>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section id="proprieta" style="background: #0F0F12; color: #F2F1EC">
+<div style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #2A2A30; border-right: 1px solid #2A2A30">
+<div style="padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 56px) 64px; display: flex; flex-direction: column; gap: 22px">
+<span class="hud" style="color: #B7B6AE">02 / Proprietà</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(44px, 7vw, 112px); line-height: .92; max-width: 1100px">Smetti di <span class="ser" style="color: #E0612B">affittare</span> il tuo server.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: #2A2A30; border-top: 1px solid #2A2A30">
+<div style="background: #0F0F12; padding: 36px 32px 48px; display: flex; flex-direction: column; gap: 14px">
+<span class="hud" style="color: #E0612B">A</span>
+<h3 class="disp" style="margin: 0; font-size: 34px; font-stretch: 110%">Codice aperto</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #B7B6AE">Leggi ogni riga che gira come root sul tuo server. Modificala, se serve.</p>
+</div>
+<div style="background: #0F0F12; padding: 36px 32px 48px; display: flex; flex-direction: column; gap: 14px">
+<span class="hud" style="color: #E0612B">B</span>
+<h3 class="disp" style="margin: 0; font-size: 34px; font-stretch: 110%">Tuo per sempre</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #B7B6AE">Nessuna licenza da rinnovare, nessun costo per server. Se il progetto si fermasse, il pannello continuerebbe a funzionare.</p>
+</div>
+<div style="background: #0F0F12; padding: 36px 32px 48px; display: flex; flex-direction: column; gap: 14px">
+<span class="hud" style="color: #E0612B">C</span>
+<h3 class="disp" style="margin: 0; font-size: 34px; font-stretch: 110%">Nessun intermediario</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #B7B6AE">Il pannello parla con il tuo server e con nient'altro. I backup vanno dove scegli tu.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="misure" style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #D6D4CC; border-right: 1px solid #D6D4CC">
+<div style="padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 56px) 48px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 22px; max-width: 900px">
+<span class="hud" style="color: #55555D">03 / Misure</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(40px, 5.6vw, 84px); line-height: .95">Misurato, non <span class="ser" style="color: #E0612B">promesso.</span></h2>
+</div>
+<p style="margin: 0; max-width: 380px; font-size: 17px; line-height: 1.55; color: #3B3B42">Ogni impostazione è stata provata da sola, contro la sua assenza. Quelle che non vincevano non ci sono. Metodo e dati grezzi sono pubblici.</p>
+</div>
+<div style="overflow-x: auto; border-top: 1px solid #0F0F12">
+<table style="width: 100%; min-width: 720px; border-collapse: collapse">
+<thead>
+<tr><th class="hud" style="text-align: left; padding: 16px clamp(20px, 4vw, 56px); color: #55555D; font-weight: 500; border-bottom: 1px solid #D6D4CC">Scenario</th><th class="hud" style="text-align: right; padding: 16px 24px; color: #55555D; font-weight: 500; border-bottom: 1px solid #D6D4CC">Richieste / s</th><th class="hud" style="text-align: right; padding: 16px 24px; color: #55555D; font-weight: 500; border-bottom: 1px solid #D6D4CC">p99</th><th class="hud" style="text-align: right; padding: 16px clamp(20px, 4vw, 56px); color: #55555D; font-weight: 500; border-bottom: 1px solid #D6D4CC">Errori</th></tr>
+</thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<tr class="inv">
+<td style="padding: 22px clamp(20px, 4vw, 56px); border-bottom: 1px solid #D6D4CC"><span class="disp" style="font-size: 22px; font-stretch: 105%">{{r.name}}</span> <span class="hud m" style="margin-left: 10px">{{r.note}}</span></td>
+<td class="disp" style="padding: 22px 24px; text-align: right; font-size: 26px; border-bottom: 1px solid #D6D4CC">[REQ/S]</td>
+<td class="disp" style="padding: 22px 24px; text-align: right; font-size: 26px; border-bottom: 1px solid #D6D4CC">[P99]</td>
+<td class="hud m" style="padding: 22px clamp(20px, 4vw, 56px); text-align: right; border-bottom: 1px solid #D6D4CC">[ERRORI]</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div class="hud" style="padding: 18px clamp(20px, 4vw, 56px); color: #6E6E76; display: flex; flex-wrap: wrap; gap: 8px 32px">
+<span>Server: [CPU · RAM · SISTEMA]</span><span>Carico: wrk dalla stessa regione</span><span>Ultima misura: [DATA]</span>
+</div>
+</section>
+
+<section id="installa" style="border-top: 1px solid #D6D4CC; background: #E9E7E0">
+<div style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #D6D4CC; border-right: 1px solid #D6D4CC; display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 420px; padding: clamp(56px, 8vw, 112px) clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 24px; border-right: 1px solid #D6D4CC">
+<span class="hud" style="color: #55555D">04 / Installazione</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(40px, 5vw, 76px); line-height: .95">Un comando. <span class="ser" style="color: #2F5BFF">Davvero.</span></h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #D6D4CC">
+<li style="display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid #D6D4CC"><span class="hud" style="color: #E0612B; padding-top: 4px">01</span><span style="font-size: 18px; line-height: 1.45">Un server Ubuntu appena creato, accesso root.</span></li>
+<li style="display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid #D6D4CC"><span class="hud" style="color: #E0612B; padding-top: 4px">02</span><span style="font-size: 18px; line-height: 1.45">Il comando qui accanto. Controlla tutto prima di toccare qualcosa.</span></li>
+<li style="display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid #D6D4CC"><span class="hud" style="color: #E0612B; padding-top: 4px">03</span><span style="font-size: 18px; line-height: 1.45">Apri il link monouso, crea l'amministratore, crea il primo sito.</span></li>
+</ol>
+</div>
+<div style="flex: 1 1 560px; min-width: 0; padding: clamp(28px, 4vw, 56px); display: flex; align-items: center">
+<div style="width: 100%; background: #0F0F12; color: #F2F1EC">
+<div style="display: flex; align-items: stretch; border-bottom: 1px solid #2A2A30">
+<span class="hud" style="padding: 14px 18px; color: #B7B6AE; border-right: 1px solid #2A2A30">root@server</span>
+<span class="hud" style="padding: 14px 18px; color: #6E6E76">bash</span>
+<button type="button" onClick="{{copyCmd}}" class="hud" aria-label="Copia il comando" style="margin-left: auto; background: #2F5BFF; color: #FFFFFF; border: 0; padding: 0 18px; cursor: pointer; min-height: 44px">{{copyLabel}}</button>
+</div>
+<div style="padding: 26px 24px 30px; font-family: 'Geist Mono', monospace; font-size: 15px; line-height: 2; display: flex; flex-direction: column">
+<span><span style="color: #E0612B">#</span> curl -fsSL [URL INSTALLER] | bash<span class="caret" style="display: inline-block; width: 9px; height: 17px; background: #F2F1EC; margin-left: 6px; vertical-align: -3px"></span></span>
+<span class="t1" style="color: #B7B6AE">[ok] server controllato: sistema, memoria, porte</span>
+<span class="t2" style="color: #B7B6AE">[ok] nginx · PHP · MariaDB · Redis installati</span>
+<span class="t3" style="color: #B7B6AE">[ok] firma della release verificata</span>
+<span class="t4" style="color: #B7B6AE">[ok] pannello attivo su https://[IP]:8443</span>
+<span class="t5" style="color: #F2F1EC">→ crea l'amministratore: https://[IP]:8443/setup/…</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="border-top: 1px solid #D6D4CC">
+<div style="max-width: 1440px; margin: 0 auto; border-left: 1px solid #D6D4CC; border-right: 1px solid #D6D4CC; padding: clamp(72px, 10vw, 160px) clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 36px">
+<span class="hud" style="color: #55555D">Gratis per sempre · Nessun abbonamento</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(56px, 10vw, 168px); line-height: .86">Accendi il<br>tuo <span class="ser" style="color: #2F5BFF">server.</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#installa" class="btn-ink" style="display: inline-flex; gap: 14px; align-items: center; padding: 20px 28px; font-size: 17px; font-weight: 600">Installa CloudGround <span class="hud" style="color: inherit">→</span></a>
+<a href="https://github.com/cloudground-it/cloudground" class="btn-line" style="display: inline-flex; align-items: center; padding: 20px 28px; font-size: 17px; font-weight: 600">Il codice su GitHub</a>
+</div>
+</div>
+</section>
+
+<footer style="background: #0F0F12; color: #F2F1EC; overflow: hidden">
+<div style="max-width: 1440px; margin: 0 auto; padding: 56px clamp(20px, 4vw, 56px) 0; display: flex; flex-wrap: wrap; gap: 40px 64px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px">
+<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F2F1EC"></rect><g transform="translate(4 3) scale(.84)"><path fill="#0F0F12" d="M14 26A8 8 0 1 1 15.843 10.215A10 10 0 0 1 33.87 14.391A6 6 0 1 1 36 26Z"></path><rect x="14" y="30" width="28" height="4.6" rx="1" fill="#2F5BFF"></rect><rect x="6" y="38" width="28" height="4.6" rx="1" fill="#E0612B"></rect></g></svg>
+<span class="hud" style="color: #B7B6AE">Hosting che si misura</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="hud" style="color: #6E6E76">Prodotto</span><a href="#funzioni" style="color: #F2F1EC">Funzioni</a><a href="#misure" style="color: #F2F1EC">Misure</a><a href="#installa" style="color: #F2F1EC">Installazione</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="hud" style="color: #6E6E76">Risorse</span><a href="#top" style="color: #F2F1EC">Documentazione</a><a href="#top" style="color: #F2F1EC">Novità</a><a href="https://github.com/cloudground-it/cloudground" style="color: #F2F1EC">GitHub</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="hud" style="color: #6E6E76">Legale</span><a href="#top" style="color: #F2F1EC">Licenza</a><a href="#top" style="color: #F2F1EC">Privacy</a></div>
+</div>
+<div class="disp" aria-hidden="true" style="font-size: clamp(80px, 17.5vw, 268px); line-height: .78; letter-spacing: -.06em; white-space: nowrap; padding: 48px 0 0 clamp(12px, 2vw, 28px); color: #1E1E24">cloudground</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":6200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cache: true, copied: false };
+  }
+  renderVals() {
+    const motion = this.props.motion ?? true;
+    const on = this.state.cache;
+    const features = [
+      ['Velocità', 'Cache di pagina mirata', 'nginx serve le pagine senza toccare PHP. Quando cambi un articolo o un prezzo, si svuotano solo le pagine che lo mostrano.'],
+      ['Isolamento', 'Un PHP per ogni sito', 'Utente, processo e memoria separati. Un sito compromesso non vede gli altri.'],
+      ['Backup', 'Ripristino già provato', 'Ogni copia va fuori dal server e viene ripristinata per prova subito dopo.'],
+      ['Staging', 'Prova prima, misura poi', 'Una copia protetta da password. Un rilascio più lento della produzione viene fermato.'],
+      ['HTTPS', 'Certificati che si rinnovano', 'Let’s Encrypt, wildcard compresi, o i tuoi certificati.'],
+      ['File', 'Un editor vero nel browser', 'Riconosce il linguaggio, carica trascinando, lascia scaricare i binari.'],
+      ['Database', 'Il database, dentro il pannello', 'Tabelle, dati e SQL con i permessi del solo sito, senza strumenti esterni.'],
+      ['Accesso', 'Ruoli e due fattori', 'Amministratori, operatori sui loro siti, sola lettura. 2FA obbligatoria se vuoi.']
+    ];
+    const rows = [
+      ['Pagina in cache', '500 connessioni'],
+      ['Pagina in cache', '1 connessione'],
+      ['File statico', '1 KB'],
+      ['Navigazione reale', 'mix di pagine'],
+      ['Senza cache', 'PHP + database']
+    ];
+    return {
+      motionClass: motion ? 'motion-on' : 'motion-off',
+      cacheOn: on,
+      cacheOff: !on,
+      cachePressed: on ? 'true' : 'false',
+      cacheLabel: on ? 'accesa' : 'spenta',
+      toggleCache: () => this.setState({ cache: !on }),
+      scopeState: on ? 'Stabile' : 'Sotto sforzo',
+      scopeColor: on ? '#7C9BFF' : '#FF8A55',
+      scopeLabel: on ? 'Con la cache il tempo di risposta resta basso e piatto' : 'Senza cache il tempo di risposta sale e oscilla',
+      cacheRead: on ? 'HIT' : 'MISS',
+      phpRead: on ? 'a riposo' : 'al limite',
+      dbRead: on ? 'a riposo' : 'occupato',
+      cacheBar: on ? '92%' : '6%',
+      phpBar: on ? '10%' : '96%',
+      dbBar: on ? '8%' : '82%',
+      copyLabel: this.state.copied ? 'Copiato' : 'Copia',
+      copyCmd: () => this.setState({ copied: true }),
+      features: features.map((f, i) => ({ tag: f[0], title: f[1], text: f[2], num: String(i + 1).padStart(2, '0') })),
+      rows: rows.map((r) => ({ name: r[0], note: r[1] }))
+    };
+  }
+}
+</script>
+</body>
+</html>
