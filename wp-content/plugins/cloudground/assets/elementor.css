@@ -33,6 +33,32 @@
     gap: 0;
 }
 
+/* A container's direction and its share of a row.
+ *
+ * Elementor 4 sets both at the weight of two classes (`.e-con.e-flex`, `.e-con-full.e-flex`):
+ * `flex-direction` from a variable its own CSS fills with `column`, and `flex` as
+ * `0 1 auto`. A theme class that makes a container a row, or gives it a share of one, lost
+ * to both, and every row came out a column. Like a widget's measure and margins, the theme
+ * says these twice — `flex-direction` and `--cloudground-direction`, `flex` and
+ * `--cloudground-flex` — and this is where Elementor is told. Without a theme class they
+ * are the browser's defaults (row, `0 1 auto`), which a block container ignores.
+ *
+ * The two variables do not inherit (@property): a column's rows inside it stay rows. */
+@property --cloudground-direction {
+    syntax: "*";
+    inherits: false;
+}
+
+@property --cloudground-flex {
+    syntax: "*";
+    inherits: false;
+}
+
+.elementor .elementor-element.e-con.e-flex {
+    flex: var(--cloudground-flex, 0 1 auto);
+    flex-direction: var(--cloudground-direction, row);
+}
+
 /* Elementor's own cap on a top-level container, `min(100%, var(--width))`. */
 :where(.elementor) [data-elementor-id] > .e-con {
     max-width: none;

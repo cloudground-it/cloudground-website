@@ -38,6 +38,17 @@ controls answer "which content"; the look is the stylesheet's.
   ```
 
   Forgetting the variable is the most common reason a native section "loses its spacing".
+- **A container's direction and its share of a row go through variables too.** Elementor 4
+  sets `flex-direction` (to `column`) and `flex` at the weight of two classes, so a container
+  class that makes a row, a column or a column of a given share says it twice:
+
+  ```css
+  .hero { display: flex; }   /* a row: the default the plugin puts back */
+  .hero-copy { flex: 1 1 37.5rem; --cloudground-flex: 1 1 37.5rem;
+               flex-direction: column; --cloudground-direction: column; }
+  ```
+
+  The two variables do not inherit, so a row inside a column stays a row.
 - **Reveal on scroll:** add `cloudground-reveal` to the container whose widgets should come in
   one after the other.
 - **Photographs in a frame:** Elementor's `.elementor img { height: auto }` beats a
