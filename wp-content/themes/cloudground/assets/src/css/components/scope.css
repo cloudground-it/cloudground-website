@@ -1,0 +1,180 @@
+/* The hero's oscilloscope (template-parts/cache-scope.php, lib/scope.ts). */
+
+.scope {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.scope-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.scope-toggle {
+    min-height: 2.5rem;
+    padding: 0.625rem 0.875rem;
+    border: 0;
+    background: var(--text);
+    color: var(--ground);
+    cursor: pointer;
+    transition: background-color 0.14s linear, color 0.14s linear;
+}
+
+.scope-toggle:hover {
+    background: var(--accent);
+    color: var(--accent-text);
+}
+
+/* A switch that cannot switch is not shown: without JavaScript the starting state is all. */
+html:not(.js) .scope-toggle {
+    display: none;
+}
+
+/* One state at a time: the root's data-cache says which. */
+.scope[data-cache="on"] [data-when="off"],
+.scope[data-cache="off"] [data-when="on"] {
+    display: none;
+}
+
+.scope-screen {
+    position: relative;
+    height: 14.375rem;
+    overflow: hidden;
+    background: var(--dark);
+}
+
+.scope-plot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+}
+
+.scope-grid {
+    fill: none;
+    stroke: var(--dark-rule);
+    stroke-width: 1;
+}
+
+.scope-wave path {
+    fill: none;
+    stroke-width: 2.5;
+}
+
+.scope-wave--on path {
+    stroke: var(--accent);
+}
+
+.scope-wave--off path {
+    stroke: var(--warm);
+}
+
+.scope-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 0 solid var(--on-dark);
+}
+
+.scope-corner--tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.scope-corner--tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+.scope-corner--bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+.scope-corner--br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+.scope-label,
+.scope-state {
+    position: absolute;
+    top: 1.75rem;
+}
+
+.scope-label {
+    left: 2rem;
+    color: var(--on-dark-soft);
+}
+
+.scope-state {
+    right: 2rem;
+    color: var(--accent-on-dark);
+}
+
+.scope[data-cache="off"] .scope-state {
+    color: var(--warm-on-dark);
+}
+
+.scope-readings {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border: 1px solid var(--rule);
+    background: var(--rule);
+}
+
+.scope-reading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: 0.875rem;
+    background: var(--ground);
+}
+
+.scope-reading dd {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin: 0;
+}
+
+.scope-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 560;
+    font-stretch: 118%;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+}
+
+.scope-bar {
+    display: block;
+    width: var(--level);
+    height: 4px;
+}
+
+.scope-reading--cache .scope-bar { background: var(--accent); }
+.scope-reading--php .scope-bar { background: var(--warm); }
+.scope-reading--db .scope-bar { background: var(--text); }
+
+/* The levels the design gives each reading, with the cache and without. */
+.scope[data-cache="on"] .scope-reading--cache { --level: 92%; }
+.scope[data-cache="on"] .scope-reading--php { --level: 10%; }
+.scope[data-cache="on"] .scope-reading--db { --level: 8%; }
+.scope[data-cache="off"] .scope-reading--cache { --level: 6%; }
+.scope[data-cache="off"] .scope-reading--php { --level: 96%; }
+.scope[data-cache="off"] .scope-reading--db { --level: 82%; }
+
+.scope-note {
+    color: var(--faint);
+}
+
+@media (max-width: 30rem) {
+    .scope-reading {
+        padding: 0.75rem 0.625rem;
+    }
+
+    .scope-value {
+        font-size: 1.25rem;
+    }
+
+    .scope-label {
+        left: 1.75rem;
+    }
+
+    .scope-state {
+        right: 1.75rem;
+    }
+}

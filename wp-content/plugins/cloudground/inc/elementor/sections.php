@@ -31,33 +31,85 @@
 function cloudground_elementor_sections(): array
 {
     return [
-        'contact' => [
-            'title' => __('Contact card', 'cloudground'),
-            'icon' => 'eicon-call-to-action',
-            'part' => 'contact',
+        // The hero's oscilloscope: a switch with state (the cache on or off) and the
+        // readings that follow it. Behaviour, so a widget; every word is a field.
+        'cache-scope' => [
+            'title' => __('Cache oscilloscope', 'cloudground'),
+            'icon' => 'eicon-dual-button',
+            'part' => 'cache-scope',
             'entry' => 'site',
-            'keywords' => ['contact', 'phone', 'email'],
+            'keywords' => ['cache', 'scope', 'toggle', 'hero'],
             'controls' => [
-                'show_phone' => [
-                    'label' => __('Show the telephone', 'cloudground'),
-                    'type' => 'switcher',
-                    'return_value' => 'yes',
-                    'default' => 'yes',
-                ],
-                'show_email' => [
-                    'label' => __('Show the email', 'cloudground'),
+                'start_on' => [
+                    'label' => __('Starts with the cache on', 'cloudground'),
                     'type' => 'switcher',
                     'return_value' => 'yes',
                     'default' => 'yes',
                 ],
             ],
             'texts' => [
-                'contact.eyebrow' => [__('Eyebrow', 'cloudground'), 't'],
-                'contact.heading' => [__('Heading', 'cloudground'), 'h'],
-                'contact.lede' => [__('Sentence under it', 'cloudground'), 'a'],
-                'contact.call' => [__('Telephone button', 'cloudground'), 't'],
-                'contact.write' => [__('Email button', 'cloudground'), 't'],
+                'scope.caption' => [__('Caption above', 'cloudground'), 't'],
+                'scope.toggle' => [__('Switch: what it switches', 'cloudground'), 't'],
+                'scope.on' => [__('Switch: on', 'cloudground'), 't'],
+                'scope.off' => [__('Switch: off', 'cloudground'), 't'],
+                'scope.axis' => [__('Screen: what it shows', 'cloudground'), 't'],
+                'scope.stable' => [__('Screen: state with the cache', 'cloudground'), 't'],
+                'scope.strained' => [__('Screen: state without', 'cloudground'), 't'],
+                'scope.describeOn' => [__('Screen described, with the cache (screen readers)', 'cloudground'), 't'],
+                'scope.describeOff' => [__('Screen described, without (screen readers)', 'cloudground'), 't'],
+                'scope.cache' => [__('Reading 1: name', 'cloudground'), 't'],
+                'scope.cacheOn' => [__('Reading 1: with the cache', 'cloudground'), 't'],
+                'scope.cacheOff' => [__('Reading 1: without', 'cloudground'), 't'],
+                'scope.php' => [__('Reading 2: name', 'cloudground'), 't'],
+                'scope.phpOn' => [__('Reading 2: with the cache', 'cloudground'), 't'],
+                'scope.phpOff' => [__('Reading 2: without', 'cloudground'), 't'],
+                'scope.db' => [__('Reading 3: name', 'cloudground'), 't'],
+                'scope.dbOn' => [__('Reading 3: with the cache', 'cloudground'), 't'],
+                'scope.dbOff' => [__('Reading 3: without', 'cloudground'), 't'],
+                'scope.note' => [__('Note below', 'cloudground'), 'a'],
             ],
+        ],
+
+        // The measurements: a table, which no native widget draws, holding numbers that
+        // change with every benchmark run. Data, so a widget.
+        'measures' => [
+            'title' => __('Measurements table', 'cloudground'),
+            'icon' => 'eicon-table',
+            'part' => 'measures',
+            'entry' => 'site',
+            'keywords' => ['benchmark', 'table', 'measures', 'numbers'],
+            'controls' => [],
+            'texts' => [
+                'measures.caption' => [__('What the table is (screen readers)', 'cloudground'), 't'],
+                'measures.scenario' => [__('Column 1', 'cloudground'), 't'],
+                'measures.rps' => [__('Column 2', 'cloudground'), 't'],
+                'measures.p99' => [__('Column 3', 'cloudground'), 't'],
+                'measures.errors' => [__('Column 4', 'cloudground'), 't'],
+                'measures.rows' => [__('Rows', 'cloudground'), 'p'],
+                'measures.notes' => [__('Notes under the table', 'cloudground'), 'p'],
+            ],
+            'note' => __('Rows: one per paragraph, five values separated by « | »: scenario | note | requests per second | p99 | errors. Notes: one per paragraph. Only numbers that were measured.', 'cloudground'),
+        ],
+
+        // The installer's terminal: the command, a button that copies it, and the lines
+        // the installer prints, played as the terminal comes into view. Behaviour.
+        'install-terminal' => [
+            'title' => __('Install terminal', 'cloudground'),
+            'icon' => 'eicon-code',
+            'part' => 'install-terminal',
+            'entry' => 'site',
+            'keywords' => ['install', 'terminal', 'command', 'copy'],
+            'controls' => [],
+            'texts' => [
+                'terminal.user' => [__('Tab: where', 'cloudground'), 't'],
+                'terminal.shell' => [__('Tab: shell', 'cloudground'), 't'],
+                'terminal.copy' => [__('Button', 'cloudground'), 't'],
+                'terminal.copyWhat' => [__('Button, the rest for screen readers', 'cloudground'), 't'],
+                'terminal.copied' => [__('Button, once copied', 'cloudground'), 't'],
+                'terminal.command' => [__('The command (what is copied)', 'cloudground'), 't'],
+                'terminal.output' => [__('What the installer prints', 'cloudground'), 'p'],
+            ],
+            'note' => __('One line of output per paragraph; the last one is drawn brighter. The command is copied exactly as typed.', 'cloudground'),
         ],
     ];
 }

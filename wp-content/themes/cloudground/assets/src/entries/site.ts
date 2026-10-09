@@ -3,7 +3,17 @@
  */
 import "../css/site.css";
 import { initReveal } from "../lib/reveal.ts";
+import { initScope } from "../lib/scope.ts";
+import { initTerminal } from "../lib/terminal.ts";
+import { initMarquee } from "../lib/marquee.ts";
 import { onElementorRender } from "../lib/editor.ts";
 
-initReveal();
-onElementorRender((root) => initReveal(root));
+const init = (root: ParentNode = document) => {
+    initReveal(root);
+    initScope(root);
+    initTerminal(root);
+    initMarquee(root);
+};
+
+init();
+onElementorRender((root) => init(root));

@@ -1,0 +1,78 @@
+/* The measurements table (template-parts/measures.php). */
+
+.measures-scroll {
+    overflow-x: auto;
+    border-top: 1px solid var(--text);
+}
+
+.measures-table {
+    width: 100%;
+    min-width: 45rem;
+    border-collapse: collapse;
+}
+
+.measures-table th,
+.measures-table td {
+    padding: 1.375rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    font-weight: inherit;
+    text-align: right;
+}
+
+.measures-table thead th {
+    padding-block: 1rem;
+    font-weight: 500;
+}
+
+.measures-table tr > :first-child {
+    padding-left: var(--pad);
+    text-align: left;
+}
+
+.measures-table tr > :last-child {
+    padding-right: var(--pad);
+}
+
+.measures-scenario {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 560;
+    font-stretch: 105%;
+    letter-spacing: -0.045em;
+}
+
+.measures-note {
+    margin-left: 0.625rem;
+}
+
+.measures-number {
+    font-family: var(--font-heading);
+    font-size: 1.625rem;
+    font-weight: 560;
+    font-stretch: 118%;
+    letter-spacing: -0.045em;
+}
+
+.measures-row,
+.measures-row .hud {
+    transition: background-color 0.14s linear, color 0.14s linear;
+}
+
+.measures-row:hover {
+    background: var(--text);
+    color: var(--ground);
+}
+
+.measures-row:hover .hud {
+    color: var(--on-dark-soft);
+}
+
+.measures-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin: 0;
+    padding: 1.125rem var(--pad);
+    list-style: none;
+    color: var(--faint);
+}

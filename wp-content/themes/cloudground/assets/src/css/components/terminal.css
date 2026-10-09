@@ -1,0 +1,88 @@
+/* The installer's terminal (template-parts/install-terminal.php, lib/terminal.ts). */
+
+.terminal {
+    width: 100%;
+    background: var(--dark);
+    color: var(--on-dark);
+}
+
+.terminal-bar {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--dark-rule);
+}
+
+.terminal-tab {
+    padding: 0.875rem 1.125rem;
+    border-right: 1px solid var(--dark-rule);
+    color: var(--on-dark-soft);
+}
+
+/* `.terminal` in front: the terminal is `.on-dark`, whose `.hud` colour (two classes) would
+   otherwise paint the quiet tab and the button's words. */
+.terminal .terminal-tab--quiet {
+    border-right: 0;
+    color: var(--faint-on-dark);
+}
+
+.terminal .terminal-copy {
+    min-height: 2.75rem;
+    margin-left: auto;
+    padding: 0 1.125rem;
+    border: 0;
+    background: var(--accent);
+    color: var(--accent-text);
+    cursor: pointer;
+}
+
+.terminal .terminal-copy:hover {
+    background: var(--on-dark);
+    color: var(--dark);
+}
+
+html:not(.js) .terminal-copy {
+    display: none;
+}
+
+.terminal-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.625rem 1.5rem 1.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    line-height: 2;
+    overflow-wrap: anywhere;
+}
+
+.terminal-command code {
+    font: inherit;
+}
+
+.terminal-prompt {
+    color: var(--warm);
+}
+
+.terminal-line {
+    color: var(--on-dark-soft);
+}
+
+.terminal-line:last-child {
+    color: var(--on-dark);
+}
+
+.caret {
+    display: inline-block;
+    width: 9px;
+    height: 17px;
+    margin-left: 6px;
+    background: var(--on-dark);
+    vertical-align: -3px;
+}
+
+@media (max-width: 30rem) {
+    .terminal-body {
+        padding-inline: 1.125rem;
+        font-size: 0.8125rem;
+        line-height: 1.85;
+    }
+}

@@ -131,7 +131,17 @@ abstract class Cloudground_Section extends \Elementor\Widget_Base
     }
 }
 
-class Cloudground_Section_Contact extends Cloudground_Section
+class Cloudground_Section_CacheScope extends Cloudground_Section
 {
-    protected const SECTION = 'contact';
+    protected const SECTION = 'cache-scope';
+}
+
+class Cloudground_Section_Measures extends Cloudground_Section
+{
+    protected const SECTION = 'measures';
+}
+
+class Cloudground_Section_InstallTerminal extends Cloudground_Section
+{
+    protected const SECTION = 'install-terminal';
 }
