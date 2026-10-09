@@ -193,6 +193,9 @@ add_action('wp_head', static function (): void {
         printf('<meta property="og:image" content="%s" />' . "\n", esc_url($image['url']));
         printf('<meta property="og:image:width" content="%d" />' . "\n", $image['width']);
         printf('<meta property="og:image:height" content="%d" />' . "\n", $image['height']);
+        if ($image['alt'] !== '') {
+            printf('<meta property="og:image:alt" content="%s" />' . "\n", esc_attr($image['alt']));
+        }
         echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
     }
 }, 2);
@@ -201,7 +204,7 @@ add_action('wp_head', static function (): void {
  * The sharing card: this page's featured image, then the front page's. None is better
  * than a wrong one.
  *
- * @return array{url: string, width: int, height: int}|null
+ * @return array{url: string, width: int, height: int, alt: string}|null
  */
 function cloudground_og_image(): ?array
 {
@@ -220,8 +223,25 @@ function cloudground_og_image(): ?array
         'url' => add_query_arg('v', (string) get_post_modified_time('U', true, $id), (string) $src[0]),
         'width' => (int) $src[1],
         'height' => (int) $src[2],
+        // The picture described in the page's language (the plugin keeps one alt per language).
+        'alt' => function_exists('cloudground_attachment_alt') ? cloudground_attachment_alt($id) : trim((string) get_post_meta($id, '_wp_attachment_image_alt', true)),
     ];
 }
+
+/**
+ * The tile mark as the tab's icon: SVG where the browser takes it, a 32px PNG where it does
+ * not, and a 180px one on a paper ground for a phone's home screen. The theme's own files,
+ * unless the site sets an icon in the Customizer, which WordPress then prints itself.
+ */
+add_action('wp_head', static function (): void {
+    if (has_site_icon()) {
+        return;
+    }
+    $img = CLOUDGROUND_THEME_URI . '/assets/img/';
+    printf('<link rel="icon" href="%s" type="image/svg+xml" />' . "\n", esc_url($img . 'favicon.svg'));
+    printf('<link rel="icon" href="%s" type="image/png" sizes="32x32" />' . "\n", esc_url($img . 'favicon-32.png'));
+    printf('<link rel="apple-touch-icon" href="%s" />' . "\n", esc_url($img . 'apple-touch-icon.png'));
+}, 3);
 
 /**
  * The boot script: blocking on purpose, and tiny.

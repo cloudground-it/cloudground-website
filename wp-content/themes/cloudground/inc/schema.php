@@ -52,6 +52,8 @@ function cloudground_schema_business(): array
         'email' => $who['email'],
         'address' => count($address) > 1 ? $address : null,
         'vatID' => (string) ($facts['vat'] ?? ''),
+        // The source code's home, which the header and the footer link to.
+        'sameAs' => $who['repository'] !== '' ? [$who['repository']] : null,
     ], static fn ($v): bool => $v !== '' && $v !== null);
 }
 

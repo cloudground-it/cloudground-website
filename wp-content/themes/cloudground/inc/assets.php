@@ -193,6 +193,15 @@ add_action('wp_head', static function (): void {
     foreach (cloudground_entry_preloads(cloudground_entry()) as $file) {
         printf('<link rel="modulepreload" href="%s" />' . "\n", esc_url(cloudground_dist_url($file)));
     }
+    // The faces the first screen is set in. Found only after the stylesheet has been
+    // parsed otherwise, which is a visible swap on every first visit. `crossorigin` even
+    // on our own origin: fonts are fetched in CORS mode, and a preload without it is
+    // downloaded twice.
+    foreach ((array) (cloudground_chunk(cloudground_entry())['assets'] ?? []) as $file) {
+        if (str_ends_with((string) $file, '.woff2')) {
+            printf('<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin />' . "\n", esc_url(cloudground_dist_url((string) $file)));
+        }
+    }
 }, 6);
 
 /** A built theme is a built theme: say so where somebody can act on it. */
