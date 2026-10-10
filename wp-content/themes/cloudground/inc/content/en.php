@@ -36,7 +36,7 @@ return array_replace($base, [
         'label' => 'Project status',
         'release' => 'Release [VERSIONE] available',
         'systems' => 'Ubuntu 24.04 · 26.04',
-        'license' => 'AGPL-3.0 licence',
+        'license' => 'Elastic License 2.0',
         'price' => 'No subscription',
     ],
 

@@ -10,7 +10,7 @@ A WordPress site built from [Bottega](https://github.com/frascella-dev/bottega):
 <!-- Fill this in when the project starts (the bottega-new-project skill does). Only facts
      the owner gave: an empty line is better than a guess. -->
 
-- **Business:** CloudGround, an open source hosting control panel
+- **Business:** CloudGround, a source-available hosting control panel (Elastic License 2.0: free to use and self-host, not to resell as a hosted service; never call it open source)
 - **Languages:** it (default), en
 - **Production:** not decided
 - **Plugins it runs with:** Elementor, Polylang

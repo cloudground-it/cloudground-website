@@ -78,12 +78,12 @@ $words = [
     'it' => [
         'home' => 'Home',
         'hero' => [
-            'eyebrow' => '001 / Pannello di hosting open source',
+            'eyebrow' => '001 / Pannello di hosting sui tuoi server',
             'title' => 'Hosting<br>che si <em>misura.</em>',
             'lede' => 'Un comando installa il pannello sul tuo server. Ogni sito nasce con la sua cache, il suo PHP, il suo certificato e backup che vengono ripristinati per prova dopo ogni copia.',
             'install' => 'Installa in un comando',
             'docs' => 'Leggi le docs',
-            'tagline' => 'Gratis · Codice aperto · Sui tuoi server',
+            'tagline' => 'Gratis · Codice consultabile · Sui tuoi server',
         ],
         'features' => [
             'eyebrow' => '01 / Funzioni',
@@ -104,7 +104,7 @@ $words = [
             'eyebrow' => '02 / Proprietà',
             'title' => 'Smetti di <em>affittare</em> il tuo server.',
             'cells' => [
-                ['A', 'Codice aperto', 'Leggi ogni riga che gira come root sul tuo server. Modificala, se serve.'],
+                ['A', 'Codice consultabile', 'Leggi ogni riga che gira come root sul tuo server. Modificala, se serve.'],
                 ['B', 'Tuo per sempre', 'Nessuna licenza da rinnovare, nessun costo per server. Se il progetto si fermasse, il pannello continuerebbe a funzionare.'],
                 ['C', 'Nessun intermediario', 'Il pannello parla con il tuo server e con nient’altro. I backup vanno dove scegli tu.'],
             ],
@@ -138,12 +138,12 @@ $words = [
     'en' => [
         'home' => 'Home',
         'hero' => [
-            'eyebrow' => '001 / Open source hosting panel',
+            'eyebrow' => '001 / Self-hosted hosting panel',
             'title' => 'Hosting<br>that’s <em>measured.</em>',
             'lede' => 'One command installs the panel on your server. Every site starts with its own cache, its own PHP, its own certificate, and backups that are test-restored after every copy.',
             'install' => 'Install in one command',
             'docs' => 'Read the docs',
-            'tagline' => 'Free · Open source · On your servers',
+            'tagline' => 'Free · Source-available · On your servers',
         ],
         'features' => [
             'eyebrow' => '01 / Features',
@@ -164,7 +164,7 @@ $words = [
             'eyebrow' => '02 / Ownership',
             'title' => 'Stop <em>renting</em> your server.',
             'cells' => [
-                ['A', 'Open source', 'Read every line that runs as root on your server. Change it, if you need to.'],
+                ['A', 'Source-available', 'Read every line that runs as root on your server. Change it, if you need to.'],
                 ['B', 'Yours for good', 'No licence to renew, no cost per server. If the project stopped, the panel would keep working.'],
                 ['C', 'No middleman', 'The panel talks to your server and nothing else. Backups go wherever you choose.'],
             ],

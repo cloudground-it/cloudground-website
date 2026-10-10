@@ -39,7 +39,7 @@ return [
         'label' => 'Stato del progetto',
         'release' => 'Release [VERSIONE] disponibile',
         'systems' => 'Ubuntu 24.04 · 26.04',
-        'license' => 'Licenza AGPL-3.0',
+        'license' => 'Licenza Elastic 2.0',
         'price' => 'Nessun abbonamento',
     ],
 
